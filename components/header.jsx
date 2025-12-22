@@ -1,8 +1,11 @@
-import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
+"use client";
+
+import { SignInButton, UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { use } from "react";
 import { Button } from "./ui/button";
+import { Authenticated, Unauthenticated } from "convex/react";
 
 const Header = () => {
   return (
@@ -12,11 +15,11 @@ const Header = () => {
           {/*Logo */}
           <Link href={"/"} className="flex items-center">
             <Image
-              src="/logo.png"
-              alt="orGenZer Logo"
+              src="/logo2.png"
+              alt="Logo_orGenZer"
               width={500}
               height={500}
-              className="w-full h-15"
+              className="w-full h-13"
               priority
             />
 
@@ -27,18 +30,16 @@ const Header = () => {
 
           {/*Right side action */}
           <div className="flex items-center">
-            <SignedIn>
+            <Authenticated>
               {/*create event button  */}
               <UserButton />
-            </SignedIn>
+            </Authenticated>
 
-            <SignedOut>
-                <SignInButton mode="modal">
-                  <Button size="sm">Sign In</Button>
-                </SignInButton>
-
-            </SignedOut>
-            
+            <Unauthenticated>
+              <SignInButton mode="modal">
+                <Button size="sm">Sign In</Button>
+              </SignInButton>
+            </Unauthenticated>
           </div>
         </div>
 
