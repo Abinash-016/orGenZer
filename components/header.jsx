@@ -1,6 +1,8 @@
+import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { Button } from "./ui/button";
 
 const Header = () => {
   return (
@@ -10,11 +12,11 @@ const Header = () => {
           {/*Logo */}
           <Link href={"/"} className="flex items-center">
             <Image
-              src="/spott.png"
-              alt="Spott logo"
+              src="/logo.png"
+              alt="orGenZer Logo"
               width={500}
               height={500}
-              className="w-full h-11"
+              className="w-full h-15"
               priority
             />
 
@@ -24,6 +26,20 @@ const Header = () => {
           {/*Search location  */}
 
           {/*Right side action */}
+          <div className="flex items-center">
+            <SignedIn>
+              {/*create event button  */}
+              <UserButton />
+            </SignedIn>
+
+            <SignedOut>
+                <SignInButton mode="modal">
+                  <Button size="sm">Sign In</Button>
+                </SignInButton>
+
+            </SignedOut>
+            
+          </div>
         </div>
 
         {/*Search location  -for mobile*/}
