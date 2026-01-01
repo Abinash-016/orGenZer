@@ -9,11 +9,17 @@ import { Authenticated, Unauthenticated } from "convex/react";
 import { BarLoader } from "react-spinners";
 import { useStoreUser } from "@/hooks/use-store-user";
 import { Building, Plus, Ticket } from "lucide-react";
+import OnboardingModal from "./onboarding-modal";
+import { useOnboarding } from "@/hooks/use-onboarding";
+import SearchLocationBar from "./search-location-bar";
 
 const Header = () => {
   const { isLoading } = useStoreUser();
 
   const { showUpgradeModal, setshowUpgradeModal } = useState(false);
+
+    const { showOnboarding, handleOnboardingComplete, handleOnboardingSkip } =
+    useOnboarding();
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 bg-background/80 backdrop-blur-xl z-20 border-b">
@@ -33,13 +39,15 @@ const Header = () => {
           </Link>
 
           {/*Search location  */}
-
+          <div className="hidden md:flex flex-1 justify-center">
+            <SearchLocationBar />
+          </div>
           {/*Right side action */}
           <div className="flex items-center">
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => setShowUpgradeModal(true)}
+              onClick={() => setshowUpgradeModal(true)}
             >
               Pricing
             </Button>
@@ -77,12 +85,17 @@ const Header = () => {
               <SignInButton mode="modal">
                 <Button size="sm">Sign In</Button>
               </SignInButton>
+
             </Unauthenticated>
+
           </div>
         </div>
 
         {/*Search location  -for mobile*/}
-
+        <div className="md:hidden border-t px-3 py-3">
+            <SearchLocationBar />
+          </div>
+    
         {/*Loader */}
         {isLoading && (
           <div className="absolute bottom-0 left-0 w-full">
@@ -92,6 +105,13 @@ const Header = () => {
       </nav>
 
       {/*Modals  */}
+      <OnboardingModal
+        isOpen={showOnboarding}
+        onClose={handleOnboardingSkip}
+        onComplete={handleOnboardingComplete}
+      />
+
+
     </>
   );
 };
