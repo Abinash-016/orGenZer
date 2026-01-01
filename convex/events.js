@@ -143,4 +143,5 @@ export const deleteEvent = mutation({
 
     return { success: true };
   },
+  
 });
