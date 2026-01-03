@@ -90,6 +90,17 @@ export const getMyEvents = query({
   },
 });
 
+// Get all public events (for Explore page)
+export const getPublicEvents = query({
+  handler: async (ctx) => {
+    return await ctx.db
+      .query("events")
+      .order("desc")
+      .collect();
+  },
+});
+
+
 // Delete event
 export const deleteEvent = mutation({
   args: { eventId: v.id("events") },

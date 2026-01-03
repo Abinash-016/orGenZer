@@ -54,14 +54,20 @@ export default function MyTicketsPage() {
 
   const now = Date.now();
 
-  const upcomingTickets = registrations?.filter(
+const upcomingTickets =
+  registrations?.filter(
     (reg) =>
-      reg.event && reg.event.startDate >= now && reg.status === "confirmed"
-  );
-  const pastTickets = registrations?.filter(
+      reg.event &&
+      reg.event.endDate > now &&
+      reg.status === "confirmed"
+  ) || [];
+
+const pastTickets =
+  registrations?.filter(
     (reg) =>
-      reg.event && (reg.event.startDate < now || reg.status === "cancelled")
-  );
+      reg.event &&
+      (reg.event.endDate <= now || reg.status === "cancelled")
+  ) || [];
 
   return (
     <div className="min-h-screen pb-20 px-4">
