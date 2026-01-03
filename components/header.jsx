@@ -32,8 +32,8 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image
-              src="/spott.png"
-              alt="Spott logo"
+              src="/logo2.png"
+              alt="orGenZer logo"
               width={500}
               height={500}
               className="w-full h-11"
